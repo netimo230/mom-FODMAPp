@@ -10,6 +10,24 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyAh2kSqAXM4iKMXVrpiSsob1IB5ROPiYbY",
+  authDomain: "mom-fodmap.firebaseapp.com",
+  databaseURL: "https://mom-fodmap-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "mom-fodmap",
+  storageBucket: "mom-fodmap.firebasestorage.app",
+  messagingSenderId: "634749843157",
+  appId: "1:634749843157:web:361810a2b830ddb541545c"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
   <!-- NAV -->
   <nav class="nav">

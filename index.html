@@ -11,7 +11,6 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav class="nav">
     <div class="nav-logo">
       <span class="nav-leaf">🌿</span>
@@ -21,6 +20,7 @@
       <button class="nav-btn active" data-section="dashboard">Tableau de bord</button>
       <button class="nav-btn" data-section="recipes">Recettes</button>
       <button class="nav-btn" data-section="fridge">Mon frigo</button>
+      <button class="nav-btn" data-section="aliments">Aliments</button>
       <button class="nav-btn" data-section="journal">Journal</button>
     </div>
     <div class="nav-sync">
@@ -31,10 +31,9 @@
 
   <main class="main">
 
-    <!-- ═══════════════════════════════════════════════════ DASHBOARD -->
+    <!-- ═══════════════════ DASHBOARD ═══════════════════ -->
     <section id="section-dashboard" class="section active">
 
-      <!-- Phase banner -->
       <div id="phase-banner" class="phase-banner phase-1">
         <div class="phase-left">
           <div class="phase-badge">Phase <span id="phase-num">1</span></div>
@@ -48,31 +47,41 @@
         </div>
       </div>
 
-      <!-- Start / reset -->
       <div id="start-block" class="start-block">
-        <p class="start-text">Vous n'avez pas encore commencé votre protocole FODMAP.</p>
-        <button class="btn-primary" id="btn-start">Commencer aujourd'hui</button>
+        <p class="start-text">Indiquez la date de début de votre régime FODMAP.</p>
+        <div class="start-form">
+          <div class="date-input-wrap">
+            <label for="start-date-input">Date de début du régime</label>
+            <input type="date" id="start-date-input" class="text-input date-start-input" />
+          </div>
+          <button class="btn-primary" id="btn-start">Enregistrer et démarrer</button>
+        </div>
+        <p class="start-hint">Vous pouvez saisir une date passée si vous avez déjà commencé.</p>
       </div>
 
       <div id="progress-block" class="progress-block hidden">
         <div class="progress-header">
-          <span>Progression globale</span>
-          <span id="progress-pct">0%</span>
+          <div class="progress-title-row">
+            <span>Progression globale du protocole</span>
+            <span id="progress-pct" class="progress-pct-badge">0%</span>
+          </div>
+          <div class="progress-date-row">
+            <span id="progress-start-label">Débuté le –</span>
+            <button class="btn-change-date" id="btn-change-date">✏️ Modifier la date</button>
+          </div>
         </div>
         <div class="progress-track">
           <div class="progress-fill" id="progress-fill" style="width:0%"></div>
-          <div class="phase-marker phase-marker-1" title="Phase 2 (Réintroduction)" style="left:33.3%"></div>
-          <div class="phase-marker phase-marker-2" title="Phase 3 (Personnalisation)" style="left:72.2%"></div>
+          <div class="phase-marker phase-marker-1" title="Début Phase 2" style="left:42.86%"></div>
+          <div class="phase-marker phase-marker-2" title="Début Phase 3" style="left:85.71%"></div>
         </div>
         <div class="progress-labels">
-          <span>Élimination (6 sem.)</span>
-          <span>Réintroduction (8 sem.)</span>
-          <span>Personnalisation</span>
+          <span>Phase 1 – Élimination (6 sem.)</span>
+          <span>Phase 2 – Réintroduction (8 sem.)</span>
+          <span>Phase 3</span>
         </div>
-        <button class="btn-ghost mt" id="btn-reset">Réinitialiser le protocole</button>
       </div>
 
-      <!-- Phase guide cards -->
       <div class="phase-cards">
         <div class="phase-card pc-1">
           <div class="pc-number">01</div>
@@ -81,8 +90,9 @@
           <ul class="pc-list">
             <li>Zéro aliment riche en FODMAP</li>
             <li>Lire toutes les étiquettes</li>
-            <li>Cuisiner soi-même autant que possible</li>
+            <li>Cuisiner maison au maximum</li>
             <li>Tenir un journal des symptômes</li>
+            <li>Idéalement suivi par une diététicienne</li>
           </ul>
         </div>
         <div class="phase-card pc-2">
@@ -90,10 +100,10 @@
           <div class="pc-title">Réintroduction</div>
           <div class="pc-duration">6 à 8 semaines</div>
           <ul class="pc-list">
-            <li>Réintroduire une famille à la fois</li>
-            <li>Tester : petite → moyenne → grande portion (3 jours)</li>
-            <li>Attendre 2–3 jours entre chaque test</li>
-            <li>Noter toutes les réactions</li>
+            <li>Réintroduire une seule famille à la fois</li>
+            <li>3 jours par test (petite → grande portion)</li>
+            <li>2–3 jours sans test entre chaque famille</li>
+            <li>Tout noter dans le journal</li>
           </ul>
         </div>
         <div class="phase-card pc-3">
@@ -101,48 +111,28 @@
           <div class="pc-title">Personnalisation</div>
           <div class="pc-duration">Long terme</div>
           <ul class="pc-list">
-            <li>Réintégrer tout ce qui est bien toléré</li>
-            <li>Éviter uniquement les FODMAP problématiques</li>
+            <li>Réintégrer ce qui est bien toléré</li>
+            <li>Éviter uniquement vos FODMAP sensibles</li>
             <li>Alimentation variée et durable</li>
-            <li>Retester périodiquement les intolérances</li>
+            <li>Retester périodiquement</li>
           </ul>
         </div>
       </div>
 
-      <!-- Aliments autorisés / interdits Phase 1 -->
-      <div class="aliments-grid">
-        <div class="aliments-card allowed">
-          <h3 class="aliments-title">✅ Autorisés (Phase 1)</h3>
-          <div class="aliments-tags">
-            <span>Riz</span><span>Quinoa</span><span>Avoine</span><span>Pomme de terre</span>
-            <span>Carotte</span><span>Courgette</span><span>Épinards</span><span>Tomates</span>
-            <span>Poivron rouge</span><span>Laitue</span><span>Concombre</span><span>Aubergine</span>
-            <span>Fraise</span><span>Myrtille</span><span>Orange</span><span>Banane mûre</span>
-            <span>Kiwi</span><span>Raisin</span><span>Ananas</span><span>Mandarine</span>
-            <span>Poulet</span><span>Poisson</span><span>Œufs</span><span>Tofu ferme</span>
-            <span>Parmesan</span><span>Brie</span><span>Camembert</span><span>Lait sans lactose</span>
-            <span>Huile d'olive</span><span>Graines de chia</span><span>Noix</span><span>Arachides</span>
-          </div>
-        </div>
-        <div class="aliments-card forbidden">
-          <h3 class="aliments-title">🚫 Interdits (Phase 1)</h3>
-          <div class="aliments-tags">
-            <span>Oignon</span><span>Ail</span><span>Poireau</span><span>Échalote</span>
-            <span>Blé / Gluten</span><span>Seigle</span><span>Orge</span>
-            <span>Lait de vache</span><span>Yaourt classique</span><span>Glace</span>
-            <span>Pomme</span><span>Poire</span><span>Pastèque</span><span>Mangue</span>
-            <span>Cerise</span><span>Pêche</span><span>Abricot</span><span>Prune</span>
-            <span>Champignons</span><span>Chou-fleur</span><span>Brocoli (grande qtité)</span>
-            <span>Asperge</span><span>Artichaut</span><span>Betterave</span>
-            <span>Légumineuses</span><span>Lentilles</span><span>Pois chiches</span>
-            <span>Miel</span><span>Sirop de maïs</span><span>Édulcorants polyols</span>
-          </div>
+      <div class="fodmap-families">
+        <h3 class="families-title">Les 5 familles de FODMAP</h3>
+        <div class="families-grid">
+          <div class="family-card"><div class="family-letter">F</div><div class="family-name">Fructose</div><div class="family-ex">Miel, pomme, poire, mangue, sirop d'agave</div></div>
+          <div class="family-card"><div class="family-letter">O</div><div class="family-name">Oligosaccharides</div><div class="family-ex">Blé, ail, oignon, légumineuses, poireau</div></div>
+          <div class="family-card"><div class="family-letter">D</div><div class="family-name">Disaccharides</div><div class="family-ex">Lait, yaourt, fromage frais (lactose)</div></div>
+          <div class="family-card"><div class="family-letter">M</div><div class="family-name">Monosaccharides</div><div class="family-ex">Fructose en excès dans certains fruits</div></div>
+          <div class="family-card"><div class="family-letter">P</div><div class="family-name">Polyols</div><div class="family-ex">Sorbitol, xylitol, maltitol – champignons crus, certains fruits</div></div>
         </div>
       </div>
 
     </section>
 
-    <!-- ═══════════════════════════════════════════════════ RECETTES -->
+    <!-- ═══════════════════ RECETTES ═══════════════════ -->
     <section id="section-recipes" class="section">
       <div class="section-header">
         <h2 class="section-title">Recettes FODMAP</h2>
@@ -155,12 +145,7 @@
           <button class="filter-btn" data-filter="dessert">Dessert</button>
         </div>
       </div>
-
-      <div class="recipes-grid" id="recipes-grid">
-        <!-- Injected by JS -->
-      </div>
-
-      <!-- Recipe modal -->
+      <div class="recipes-grid" id="recipes-grid"></div>
       <div id="recipe-modal" class="modal hidden">
         <div class="modal-backdrop"></div>
         <div class="modal-box">
@@ -170,13 +155,12 @@
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════════ FRIGO / IA -->
+    <!-- ═══════════════════ FRIGO / IA ═══════════════════ -->
     <section id="section-fridge" class="section">
       <div class="section-header">
         <h2 class="section-title">Mon Frigo → Recettes IA</h2>
-        <p class="section-sub">Entrez vos ingrédients disponibles et l'IA génère des recettes FODMAP adaptées.</p>
+        <p class="section-sub">Entrez vos ingrédients disponibles. L'IA génère des recettes FODMAP sur mesure en tenant compte de votre phase.</p>
       </div>
-
       <div class="fridge-layout">
         <div class="fridge-input-col">
           <div class="fridge-box">
@@ -185,36 +169,59 @@
               <input type="text" id="ingredient-input" placeholder="Ex : riz, courgette, œufs…" class="text-input" />
               <button class="btn-primary sm" id="btn-add-ingredient">Ajouter</button>
             </div>
-            <div id="ingredient-list" class="ingredient-list">
-              <p class="empty-hint">Aucun ingrédient ajouté</p>
+            <p class="hint-small">Séparez par des virgules pour ajouter plusieurs ingrédients à la fois.</p>
+            <div id="ingredient-list" class="ingredient-list"><p class="empty-hint">Aucun ingrédient ajouté</p></div>
+            <div class="fridge-actions">
+              <button class="btn-accent full" id="btn-generate-recipes"><span id="gen-btn-label">✨ Générer des recettes</span></button>
+              <button class="btn-ghost sm" id="btn-clear-ingredients">Vider la liste</button>
             </div>
-            <button class="btn-accent full mt" id="btn-generate-recipes">
-              <span>✨ Générer des recettes</span>
-            </button>
           </div>
-
-          <div class="warning-box">
-            <p>⚠️ Les recettes générées par l'IA sont indicatives. Vérifiez toujours que chaque ingrédient est autorisé pour votre phase FODMAP actuelle.</p>
-          </div>
+          <div class="warning-box">⚠️ Les recettes générées par l'IA sont indicatives. Vérifiez toujours que chaque ingrédient est autorisé pour votre phase FODMAP actuelle.</div>
         </div>
-
         <div class="fridge-result-col">
           <div id="ai-result-placeholder" class="ai-placeholder">
             <div class="ai-placeholder-icon">🤖</div>
-            <p>Entrez vos ingrédients et cliquez sur « Générer des recettes »</p>
+            <p>Entrez vos ingrédients et cliquez sur<br>« Générer des recettes »</p>
           </div>
           <div id="ai-result" class="ai-result hidden"></div>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════════ JOURNAL -->
+    <!-- ═══════════════════ ALIMENTS ═══════════════════ -->
+    <section id="section-aliments" class="section">
+      <div class="section-header">
+        <h2 class="section-title">Base de données FODMAP</h2>
+        <p class="section-sub">Plus de 150 aliments référencés d'après le protocole officiel de l'Université Monash.</p>
+        <div class="filter-row">
+          <button class="aliment-filter active" data-f="all">Tout</button>
+          <button class="aliment-filter" data-f="legumes">🥕 Légumes</button>
+          <button class="aliment-filter" data-f="fruits">🍓 Fruits</button>
+          <button class="aliment-filter" data-f="cereales">🌾 Céréales</button>
+          <button class="aliment-filter" data-f="proteines">🍗 Protéines</button>
+          <button class="aliment-filter" data-f="laitiers">🧀 Laitiers</button>
+          <button class="aliment-filter" data-f="oleagineux">🥜 Oléagineux</button>
+          <button class="aliment-filter" data-f="condiments">🫒 Condiments</button>
+          <button class="aliment-filter" data-f="boissons">☕ Boissons</button>
+        </div>
+        <div class="aliment-search-row">
+          <input type="text" id="aliment-search" placeholder="🔍 Rechercher un aliment…" class="text-input search-input" />
+        </div>
+        <div class="aliments-legend">
+          <span class="legend-item low">🟢 Autorisé</span>
+          <span class="legend-item moderate">🟡 Modéré (petites portions)</span>
+          <span class="legend-item high">🔴 À éviter</span>
+        </div>
+      </div>
+      <div id="aliments-table" class="aliments-table"></div>
+    </section>
+
+    <!-- ═══════════════════ JOURNAL ═══════════════════ -->
     <section id="section-journal" class="section">
       <div class="section-header">
         <h2 class="section-title">Journal des symptômes</h2>
-        <p class="section-sub">Notez vos repas, symptômes et réactions quotidiennement.</p>
+        <p class="section-sub">Notez vos repas et réactions quotidiennement.</p>
       </div>
-
       <div class="journal-layout">
         <div class="journal-form-col">
           <div class="journal-form">
@@ -223,7 +230,7 @@
               <input type="date" id="journal-date" class="text-input" />
             </div>
             <div class="form-group">
-              <label>Repas du jour <span class="hint">(liste libre)</span></label>
+              <label>Repas du jour</label>
               <textarea id="journal-meals" class="text-input textarea" placeholder="Ex : riz au poulet, salade concombre, fraises…"></textarea>
             </div>
             <div class="form-group">
@@ -240,7 +247,7 @@
               </div>
             </div>
             <div class="form-group">
-              <label>Intensité globale</label>
+              <label>Intensité</label>
               <div class="intensity-row">
                 <input type="range" id="journal-intensity" min="0" max="5" value="0" class="slider" />
                 <span id="intensity-label" class="intensity-label">0 – Aucun</span>
@@ -253,19 +260,15 @@
             <button class="btn-primary full" id="btn-save-journal">Enregistrer</button>
           </div>
         </div>
-
         <div class="journal-history-col">
           <h3 class="history-title">Historique</h3>
-          <div id="journal-history" class="journal-history">
-            <p class="empty-hint">Aucune entrée enregistrée</p>
-          </div>
+          <div id="journal-history" class="journal-history"><p class="empty-hint">Aucune entrée enregistrée</p></div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- CONFIG FIREBASE (à remplir) -->
   <div id="firebase-config" class="hidden"
     data-api-key="VOTRE_API_KEY"
     data-auth-domain="VOTRE_PROJECT.firebaseapp.com"
@@ -275,498 +278,521 @@
     data-app-id="VOTRE_APP_ID">
   </div>
 
-  <!-- Firebase SDK -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection, addDoc, query, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDoc, collection, addDoc, query, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-    // ─── Firebase Init ───────────────────────────────────────────────
     const cfg = document.getElementById('firebase-config').dataset;
-    let db = null;
-    let firebaseOk = false;
-
+    let db = null, firebaseOk = false;
     try {
-      const app = initializeApp({
-        apiKey: cfg.apiKey,
-        authDomain: cfg.authDomain,
-        projectId: cfg.projectId,
-        storageBucket: cfg.storageBucket,
-        messagingSenderId: cfg.messagingSenderId,
-        appId: cfg.appId
-      });
-      db = getFirestore(app);
-      firebaseOk = true;
-      setSyncStatus(true);
-    } catch(e) {
-      console.warn("Firebase non configuré, mode local uniquement");
-      setSyncStatus(false);
-    }
+      if (cfg.apiKey && !cfg.apiKey.startsWith('VOTRE')) {
+        const app = initializeApp({ apiKey:cfg.apiKey, authDomain:cfg.authDomain, projectId:cfg.projectId, storageBucket:cfg.storageBucket, messagingSenderId:cfg.messagingSenderId, appId:cfg.appId });
+        db = getFirestore(app); firebaseOk = true; setSyncStatus(true);
+      }
+    } catch(e) {}
 
     function setSyncStatus(ok) {
-      const dot = document.getElementById('sync-dot');
-      const lbl = document.getElementById('sync-label');
-      dot.className = 'sync-dot ' + (ok ? 'online' : 'offline');
-      lbl.textContent = ok ? 'Synchronisé' : 'Hors ligne';
+      document.getElementById('sync-dot').className = 'sync-dot '+(ok?'online':'offline');
+      document.getElementById('sync-label').textContent = ok?'Synchronisé':'Hors ligne';
     }
+    const UID = 'maman';
+    async function saveDoc(path,data){ if(!firebaseOk)return; try{await setDoc(doc(db,path),data,{merge:true});setSyncStatus(true);}catch(e){setSyncStatus(false);} }
+    async function loadDoc(path){ if(!firebaseOk)return null; try{const s=await getDoc(doc(db,path));return s.exists()?s.data():null;}catch(e){return null;} }
+    async function addCol(p,data){ if(!firebaseOk)return; try{await addDoc(collection(db,p),{...data,ts:Date.now()});}catch(e){} }
+    async function getCol(p){ if(!firebaseOk)return[]; try{const q=query(collection(db,p),orderBy('ts','desc'));const s=await getDocs(q);return s.docs.map(d=>({id:d.id,...d.data()}));}catch(e){return[];} }
+    function lsGet(k){try{return JSON.parse(localStorage.getItem(k));}catch{return null;}}
+    function lsSet(k,v){localStorage.setItem(k,JSON.stringify(v));}
 
-    // ─── Storage helpers ─────────────────────────────────────────────
-    const USER_ID = 'maman'; // identifiant simple
-
-    async function saveToFirestore(path, data) {
-      if (!firebaseOk) return;
-      try {
-        await setDoc(doc(db, path), data, { merge: true });
-        setSyncStatus(true);
-      } catch(e) { setSyncStatus(false); }
-    }
-
-    async function loadFromFirestore(path) {
-      if (!firebaseOk) return null;
-      try {
-        const snap = await getDoc(doc(db, path));
-        return snap.exists() ? snap.data() : null;
-      } catch(e) { return null; }
-    }
-
-    async function addToCollection(colPath, data) {
-      if (!firebaseOk) return;
-      try { await addDoc(collection(db, colPath), { ...data, ts: Date.now() }); }
-      catch(e) { console.warn(e); }
-    }
-
-    async function getCollection(colPath) {
-      if (!firebaseOk) return [];
-      try {
-        const q = query(collection(db, colPath), orderBy('ts', 'desc'));
-        const snap = await getDocs(q);
-        return snap.docs.map(d => ({ id: d.id, ...d.data() }));
-      } catch(e) { return []; }
-    }
-
-    // ─── Local Storage fallback ───────────────────────────────────────
-    function lsGet(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } }
-    function lsSet(k, v) { localStorage.setItem(k, JSON.stringify(v)); }
-
-    // ─── PHASE & TIMER ───────────────────────────────────────────────
-    // Phases : 1 = Élimination (42j), 2 = Réintroduction (56j), 3 = Personnalisation (open)
+    // ── PHASES ──────────────────────────────────────────
     const PHASES = [
-      { num: 1, name: "Élimination stricte", desc: "Tous les aliments FODMAP sont exclus. Soyez rigoureuse !", days: 42, cls: 'phase-1' },
-      { num: 2, name: "Réintroduction progressive", desc: "Testez chaque famille une par une, notez vos réactions.", days: 56, cls: 'phase-2' },
-      { num: 3, name: "Personnalisation", desc: "Réintégrez tout ce qui est bien toléré. Alimentation durable !", days: 9999, cls: 'phase-3' }
+      {num:1,name:"Élimination stricte",desc:"Tous les aliments FODMAP sont exclus. Soyez rigoureuse !",days:42,cls:'phase-1'},
+      {num:2,name:"Réintroduction progressive",desc:"Testez chaque famille une par une, notez vos réactions.",days:56,cls:'phase-2'},
+      {num:3,name:"Personnalisation",desc:"Réintégrez tout ce qui est bien toléré. Alimentation durable !",days:9999,cls:'phase-3'}
     ];
-
     let startDate = null;
+    function getPhaseInfo(d){ let c=0; for(const p of PHASES){if(d<=c+p.days)return{phase:p,dayInPhase:d-c};c+=p.days;} return{phase:PHASES[2],dayInPhase:d-98}; }
 
-    function getPhaseInfo(totalDays) {
-      let cum = 0;
-      for (const p of PHASES) {
-        if (totalDays <= cum + p.days) {
-          return { phase: p, dayInPhase: totalDays - cum, totalDays };
-        }
-        cum += p.days;
-      }
-      return { phase: PHASES[2], dayInPhase: totalDays - 98, totalDays };
-    }
-
-    function updatePhaseUI() {
-      if (!startDate) return;
-      const today = new Date();
-      const start = new Date(startDate);
-      const diff = Math.floor((today - start) / 86400000) + 1;
-
-      const { phase, dayInPhase } = getPhaseInfo(diff);
-      const totalProtocol = 98; // 42+56
-
-      document.getElementById('phase-num').textContent = phase.num;
-      document.getElementById('phase-name-txt').textContent = phase.name;
-      document.getElementById('phase-desc-txt').textContent = phase.desc;
-      document.getElementById('phase-day-counter').textContent = dayInPhase;
-      document.getElementById('phase-total-txt').textContent = phase.num < 3 ? '/ ' + phase.days : '∞';
-
-      const banner = document.getElementById('phase-banner');
-      banner.className = 'phase-banner ' + phase.cls;
-
-      // progress
-      const pct = Math.min(100, Math.round(diff / totalProtocol * 100));
-      document.getElementById('progress-fill').style.width = pct + '%';
-      document.getElementById('progress-pct').textContent = pct + '%';
-
+    function updatePhaseUI(){
+      if(!startDate)return;
+      const diff = Math.max(1,Math.floor((new Date()-new Date(startDate))/86400000)+1);
+      const {phase,dayInPhase} = getPhaseInfo(diff);
+      document.getElementById('phase-num').textContent=phase.num;
+      document.getElementById('phase-name-txt').textContent=phase.name;
+      document.getElementById('phase-desc-txt').textContent=phase.desc;
+      document.getElementById('phase-day-counter').textContent=dayInPhase;
+      document.getElementById('phase-total-txt').textContent=phase.num<3?'/ '+phase.days:'∞';
+      document.getElementById('phase-banner').className='phase-banner '+phase.cls;
+      const pct=Math.min(100,Math.round(diff/98*100));
+      document.getElementById('progress-fill').style.width=pct+'%';
+      document.getElementById('progress-pct').textContent=pct+'%';
+      const [y,m,d]=startDate.split('-');
+      document.getElementById('progress-start-label').textContent=`Débuté le ${d}/${m}/${y}`;
       document.getElementById('start-block').classList.add('hidden');
       document.getElementById('progress-block').classList.remove('hidden');
     }
 
-    async function loadStartDate() {
-      const local = lsGet('fodmap_start');
-      const remote = await loadFromFirestore(`users/${USER_ID}/meta/protocol`);
-      startDate = (remote && remote.startDate) || local;
-      if (startDate) updatePhaseUI();
+    async function loadStartDate(){
+      const local=lsGet('fodmap_start');
+      const remote=await loadDoc(`users/${UID}/meta/protocol`);
+      startDate=(remote&&remote.startDate)||local;
+      document.getElementById('start-date-input').value = startDate || new Date().toISOString().split('T')[0];
+      if(startDate) updatePhaseUI();
     }
 
-    document.getElementById('btn-start').addEventListener('click', async () => {
-      startDate = new Date().toISOString().split('T')[0];
-      lsSet('fodmap_start', startDate);
-      await saveToFirestore(`users/${USER_ID}/meta/protocol`, { startDate });
-      updatePhaseUI();
+    document.getElementById('btn-start').addEventListener('click',async()=>{
+      const val=document.getElementById('start-date-input').value;
+      if(!val){alert('Veuillez choisir une date.');return;}
+      startDate=val; lsSet('fodmap_start',startDate);
+      await saveDoc(`users/${UID}/meta/protocol`,{startDate}); updatePhaseUI();
     });
-
-    document.getElementById('btn-reset').addEventListener('click', async () => {
-      if (!confirm('Réinitialiser le protocole ? Vos données de journal seront conservées.')) return;
-      startDate = null;
-      lsSet('fodmap_start', null);
-      await saveToFirestore(`users/${USER_ID}/meta/protocol`, { startDate: null });
-      document.getElementById('start-block').classList.remove('hidden');
+    document.getElementById('btn-change-date').addEventListener('click',()=>{
       document.getElementById('progress-block').classList.add('hidden');
+      document.getElementById('start-block').classList.remove('hidden');
+      document.getElementById('start-date-input').value=startDate||'';
     });
-
     loadStartDate();
 
-    // ─── NAVIGATION ──────────────────────────────────────────────────
-    document.querySelectorAll('.nav-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    // ── NAVIGATION ───────────────────────────────────────
+    document.querySelectorAll('.nav-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
         btn.classList.add('active');
-        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.getElementById('section-' + btn.dataset.section).classList.add('active');
+        document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+        document.getElementById('section-'+btn.dataset.section).classList.add('active');
       });
     });
 
-    // ─── RECETTES DATA ───────────────────────────────────────────────
-    const RECIPES = [
-      {
-        id: 1, title: "Riz sauté aux légumes", cat: "dejeuner", emoji: "🍚", time: "20 min",
-        desc: "Un plat simple et complet, parfait pour la phase 1.",
-        ingredients: ["200g riz basmati", "1 courgette", "1 poivron rouge", "2 œufs", "2 càs sauce soja sans gluten", "Huile de sésame", "Gingembre frais"],
-        steps: ["Cuire le riz et le laisser refroidir.", "Couper les légumes en dés.", "Faire revenir courgette et poivron 5 min à l'huile.", "Ajouter le riz, mélanger, faire sauter 3 min.", "Pousser le riz sur le bord, brouiller les œufs au centre.", "Ajouter sauce soja et gingembre."],
-        phase: 1, tips: "Remplacer la sauce soja par du tamari pour plus de saveur."
-      },
-      {
-        id: 2, title: "Porridge banane-myrtilles", cat: "petit-dej", emoji: "🥣", time: "10 min",
-        desc: "Un petit-déjeuner rassasiant et 100% FODMAP safe.",
-        ingredients: ["80g flocons d'avoine (sans gluten)", "250ml lait sans lactose", "1 banane bien mûre", "Poignée de myrtilles", "1 càs sirop d'érable", "Cannelle"],
-        steps: ["Chauffer le lait dans une casserole.", "Ajouter les flocons, cuire 5 min en remuant.", "Verser dans un bol.", "Garnir de banane tranchée, myrtilles et cannelle."],
-        phase: 1, tips: "La banane doit être bien mûre (taches brunes) pour être low-FODMAP."
-      },
-      {
-        id: 3, title: "Salade de quinoa au poulet", cat: "dejeuner", emoji: "🥗", time: "25 min",
-        desc: "Fraîche et protéinée, idéale en toutes saisons.",
-        ingredients: ["150g quinoa", "200g blanc de poulet", "1 concombre", "Tomates cerises", "Citron", "Huile d'olive", "Feuilles de menthe", "Sel, poivre"],
-        steps: ["Cuire le quinoa 15 min, laisser refroidir.", "Griller le poulet et couper en dés.", "Couper concombre et tomates.", "Mélanger tout dans un saladier.", "Assaisonner citron + huile + menthe."],
-        phase: 1, tips: "Ajouter des feuilles de basilic pour varier les arômes."
-      },
-      {
-        id: 4, title: "Omelette aux épinards et parmesan", cat: "diner", emoji: "🍳", time: "15 min",
-        desc: "Léger, rapide et savoureux pour le soir.",
-        ingredients: ["3 œufs", "Grosse poignée d'épinards frais", "30g parmesan râpé", "Huile d'olive", "Sel, poivre, muscade"],
-        steps: ["Faire tomber les épinards à la poêle 2 min.", "Battre les œufs, saler, poivrer, ajouter muscade.", "Verser sur les épinards, cuire à feu moyen.", "Parsemer de parmesan avant de plier."],
-        phase: 1, tips: "Les épinards bébé sont plus tendres et cuisent plus vite."
-      },
-      {
-        id: 5, title: "Pancakes sans gluten à la banane", cat: "petit-dej", emoji: "🥞", time: "20 min",
-        desc: "Moelleux naturellement sucrés, parfaits le week-end.",
-        ingredients: ["2 bananes mûres", "2 œufs", "80g farine de riz", "1/2 càc levure sans gluten", "Lait sans lactose", "Huile de coco"],
-        steps: ["Écraser les bananes en purée.", "Mélanger avec les œufs battus.", "Ajouter farine et levure, détendre avec un peu de lait.", "Cuire des petites louches dans une poêle huilée.", "Servir avec des fraises ou du sirop d'érable."],
-        phase: 1, tips: "La pâte doit être épaisse pour des pancakes bien moelleux."
-      },
-      {
-        id: 6, title: "Soupe de carottes au gingembre", cat: "diner", emoji: "🍲", time: "30 min",
-        desc: "Veloutée et réconfortante, parfaite pour les soirs frais.",
-        ingredients: ["6 carottes", "1 morceau gingembre frais", "500ml bouillon de légumes (sans oignon)", "Lait de coco (50ml)", "Huile d'olive", "Curcuma", "Sel, poivre"],
-        steps: ["Éplucher et couper les carottes en rondelles.", "Faire revenir les carottes à l'huile 5 min.", "Ajouter bouillon et gingembre râpé.", "Cuire 20 min jusqu'à tendreté.", "Mixer, ajouter lait de coco et curcuma."],
-        phase: 1, tips: "Faire le bouillon maison sans oignon ni ail pour plus de sécurité."
-      },
-      {
-        id: 7, title: "Saumon en papillote aux courgettes", cat: "diner", emoji: "🐟", time: "25 min",
-        desc: "Cuisine santé et savoureuse en un tour de main.",
-        ingredients: ["2 pavés de saumon", "2 courgettes", "1 citron", "Herbes fraîches (aneth, ciboulette)", "Huile d'olive", "Sel, poivre"],
-        steps: ["Préchauffer le four à 200°C.", "Disposer les courgettes en julienne sur du papier cuisson.", "Poser le saumon dessus.", "Arroser d'huile, citron, herbes, sel, poivre.", "Fermer la papillote et cuire 18 min."],
-        phase: 1, tips: "Vérifier que les herbes sont fraîches — les mélanges industriels peuvent contenir de l'ail."
-      },
-      {
-        id: 8, title: "Bowl de riz au tofu croustillant", cat: "dejeuner", emoji: "🍱", time: "30 min",
-        desc: "Complet et végétarien, riche en protéines.",
-        ingredients: ["200g riz complet", "200g tofu ferme", "1 carotte", "Épinards", "Sauce tamari (sans blé)", "Huile de sésame", "Graines de sésame"],
-        steps: ["Presser et couper le tofu en cubes.", "Faire dorer le tofu à la poêle avec huile et tamari.", "Cuire le riz. Râper la carotte.", "Assembler le bowl : riz, tofu, carotte, épinards.", "Arroser d'huile de sésame, parsemer de graines."],
-        phase: 1, tips: "Bien presser le tofu dans du papier absorbant pour qu'il croustille."
-      },
-      {
-        id: 9, title: "Crumble fraises-rhubarbe", cat: "dessert", emoji: "🍓", time: "40 min",
-        desc: "Un dessert réconfortant adapté FODMAP.",
-        ingredients: ["300g fraises", "200g rhubarbe", "3 càs sirop d'érable", "100g flocons d'avoine", "50g farine de riz", "40g beurre froid", "2 càs sucre de coco"],
-        steps: ["Préchauffer à 180°C.", "Couper fraises et rhubarbe, mélanger avec sirop.", "Verser dans un plat.", "Mélanger flocons, farine, beurre en miettes, sucre.", "Répartir le crumble sur les fruits.", "Cuire 30 min jusqu'à dorure."],
-        phase: 1, tips: "La rhubarbe est faible en FODMAP en petites portions (< 80g)."
-      },
-      {
-        id: 10, title: "Wraps de laitue au thon", cat: "snack", emoji: "🥬", time: "10 min",
-        desc: "Ultra-rapide et zéro cuisson pour un snack protéiné.",
-        ingredients: ["4 grandes feuilles de laitue", "1 boîte thon naturel", "2 càs mayonnaise (sans ail)", "1 càs câpres", "Ciboulette fraîche", "Poivre, jus de citron"],
-        steps: ["Égoutter et émietter le thon.", "Mélanger avec mayo, câpres, ciboulette, citron.", "Répartir dans les feuilles de laitue.", "Rouler et déguster immédiatement."],
-        phase: 1, tips: "Vérifier que la mayo ne contient pas d'ail ou d'oignon."
-      },
-      {
-        id: 11, title: "Smoothie kiwi-épinards-gingembre", cat: "petit-dej", emoji: "🥤", time: "5 min",
-        desc: "Un boost de vitamines pour bien commencer la journée.",
-        ingredients: ["2 kiwis", "Poignée d'épinards", "1 cm gingembre frais", "200ml lait sans lactose", "1 càs graines de chia"],
-        steps: ["Éplucher les kiwis.", "Mettre tous les ingrédients dans le blender.", "Mixer jusqu'à consistance lisse.", "Verser et parsemer de graines de chia."],
-        phase: 1, tips: "Ajouter quelques glaçons pour un smoothie bien frais."
-      },
-      {
-        id: 12, title: "Risotto au parmesan et citron", cat: "diner", emoji: "🫕", time: "35 min",
-        desc: "Crémeux et élégant, parfait pour recevoir.",
-        ingredients: ["300g riz arborio", "800ml bouillon (sans oignon)", "80g parmesan", "Zeste de citron", "Huile d'olive", "Ciboulette", "Sel, poivre"],
-        steps: ["Chauffer le bouillon séparément.", "Faire revenir le riz dans l'huile 2 min.", "Ajouter le bouillon louche par louche en remuant.", "Cuire 18–20 min en ajoutant le bouillon au fur et à mesure.", "Hors feu, incorporer parmesan, zeste, ciboulette."],
-        phase: 1, tips: "Ne jamais ajouter tout le bouillon d'un coup — la texture crémeuse vient du geste."
-      }
+    // ── RECETTES ─────────────────────────────────────────
+    const RECIPES=[
+      {id:1,title:"Riz sauté aux légumes",cat:"dejeuner",emoji:"🍚",time:"20 min",desc:"Complet et coloré, parfait pour la phase 1.",
+       ingredients:["200g riz basmati","1 courgette","1 poivron rouge","2 œufs","2 càs tamari sans blé","Huile de sésame","Gingembre frais râpé"],
+       steps:["Cuire le riz, laisser refroidir.","Couper courgette et poivron en dés.","Faire revenir les légumes 5 min à l'huile.","Ajouter riz, sauter 3 min.","Brouiller les œufs côté poêle, mélanger.","Finir avec tamari et gingembre."],
+       tips:"Du riz de la veille donne un meilleur résultat."},
+      {id:2,title:"Porridge sarrasin-myrtilles",cat:"petit-dej",emoji:"🥣",time:"10 min",desc:"Réconfortant et sans gluten.",
+       ingredients:["80g flocons de sarrasin ou riz","250ml boisson de riz","Poignée de myrtilles","Poignée de fraises","1 càs sirop d'érable","Cannelle"],
+       steps:["Chauffer la boisson de riz.","Ajouter les flocons, cuire 5 min en remuant.","Verser dans un bol.","Garnir de fruits, sirop et cannelle."],
+       tips:"Les flocons de sarrasin sont 100% sans gluten et low-FODMAP."},
+      {id:3,title:"Salade quinoa-poulet-menthe",cat:"dejeuner",emoji:"🥗",time:"25 min",desc:"Fraîche et protéinée.",
+       ingredients:["150g quinoa","200g blanc de poulet","1 concombre pelé","Tomates cerises","Jus de citron","Huile d'olive","Menthe fraîche","Sel, poivre"],
+       steps:["Cuire le quinoa 15 min, laisser tiédir.","Griller le poulet, couper en dés.","Couper concombre et tomates.","Mélanger tout.","Assaisonner citron + huile + menthe."],
+       tips:"Peler le concombre réduit sa teneur en FODMAP."},
+      {id:4,title:"Omelette épinards-parmesan",cat:"diner",emoji:"🍳",time:"15 min",desc:"Léger et savoureux pour le soir.",
+       ingredients:["3 œufs","Grande poignée d'épinards frais","30g parmesan râpé","Huile d'olive","Sel, poivre, muscade"],
+       steps:["Faire tomber les épinards 2 min à la poêle.","Battre les œufs, assaisonner.","Verser sur les épinards.","Parsemer de parmesan, plier."],
+       tips:"Le parmesan (affiné +6 mois) est naturellement très pauvre en lactose."},
+      {id:5,title:"Pancakes farine de riz-banane",cat:"petit-dej",emoji:"🥞",time:"20 min",desc:"Moelleux et naturellement sucrés.",
+       ingredients:["2 bananes fermes","2 œufs","80g farine de riz","½ càc levure sans gluten","Boisson de riz","Huile de coco"],
+       steps:["Écraser les bananes.","Mélanger avec œufs battus.","Ajouter farine, levure, détendre au lait.","Cuire en petits disques dans poêle huilée.","Servir avec fraises ou sirop d'érable."],
+       tips:"Banane encore ferme = moins de FODMAP."},
+      {id:6,title:"Velouté carotte-gingembre",cat:"diner",emoji:"🍲",time:"30 min",desc:"Doux et réconfortant.",
+       ingredients:["6 carottes","Morceau de gingembre frais","500ml bouillon maison","50ml lait de coco","Huile d'olive","Curcuma, sel, poivre"],
+       steps:["Éplucher les carottes, couper.","Faire revenir 5 min à l'huile.","Ajouter bouillon et gingembre râpé.","Cuire 20 min.","Mixer avec lait de coco et curcuma."],
+       tips:"Bouillon maison indispensable — les cubes contiennent oignon et ail."},
+      {id:7,title:"Saumon en papillote",cat:"diner",emoji:"🐟",time:"25 min",desc:"Santé et savoureux.",
+       ingredients:["2 pavés de saumon","2 courgettes en julienne","1 citron","Aneth + ciboulette fraîches","Huile d'olive","Sel, poivre"],
+       steps:["Préchauffer four à 200°C.","Étaler courgettes sur papier cuisson.","Poser saumon dessus.","Assaisonner, fermer la papillote.","Cuire 18 min."],
+       tips:"Aneth et ciboulette sont 100% low-FODMAP."},
+      {id:8,title:"Bowl tofu croustillant",cat:"dejeuner",emoji:"🍱",time:"30 min",desc:"Végétarien et riche en protéines.",
+       ingredients:["200g riz basmati","200g tofu ferme bio","1 carotte râpée","Épinards frais","2 càs tamari sans blé","Huile de sésame","Graines de sésame"],
+       steps:["Presser le tofu 15 min.","Dorer en cubes à la poêle avec tamari.","Cuire le riz.","Assembler le bowl avec tous les ingrédients.","Arroser d'huile de sésame, garnir de graines."],
+       tips:"Presser le tofu est la clé pour le croustillant."},
+      {id:9,title:"Crumble fraises-rhubarbe",cat:"dessert",emoji:"🍓",time:"40 min",desc:"Dessert réconfortant FODMAP.",
+       ingredients:["300g fraises","150g rhubarbe","3 càs sirop d'érable","100g flocons de riz/sarrasin","50g farine de riz","40g beurre froid","2 càs sucre de coco"],
+       steps:["Préchauffer four 180°C.","Couper les fruits, mélanger au sirop.","Verser dans un plat.","Mélanger flocons, farine, beurre, sucre en miettes.","Répartir sur les fruits, cuire 30 min."],
+       tips:"Limiter la rhubarbe à 80g par portion."},
+      {id:10,title:"Wraps de laitue au thon",cat:"snack",emoji:"🥬",time:"10 min",desc:"Zéro cuisson, ultra rapide.",
+       ingredients:["4 grandes feuilles de laitue","1 boîte thon naturel","2 càs mayo maison sans ail","Câpres","Ciboulette fraîche","Citron, poivre"],
+       steps:["Mélanger thon émietté avec mayo, câpres, ciboulette, citron.","Répartir dans les feuilles.","Rouler et déguster."],
+       tips:"La mayo du commerce contient souvent de l'ail — vérifier l'étiquette."},
+      {id:11,title:"Smoothie kiwi-épinards",cat:"petit-dej",emoji:"🥤",time:"5 min",desc:"Boost vitaminé du matin.",
+       ingredients:["2 kiwis","Poignée d'épinards","1 cm gingembre","200ml boisson de riz","1 càs graines de chia"],
+       steps:["Tout dans le blender.","Mixer.","Parsemer de chia."],
+       tips:"Ajouter des glaçons pour un résultat frais."},
+      {id:12,title:"Risotto parmesan-citron",cat:"diner",emoji:"🫕",time:"35 min",desc:"Crémeux et élégant.",
+       ingredients:["300g riz arborio","800ml bouillon maison","80g parmesan","Zeste de citron","Huile d'olive","Ciboulette"],
+       steps:["Chauffer le bouillon séparément.","Faire revenir le riz à l'huile 2 min.","Ajouter bouillon louche par louche en remuant.","Cuire 20 min.","Hors feu : parmesan, zeste, ciboulette."],
+       tips:"Ne jamais arrêter de remuer pour une texture crémeuse."},
+      {id:13,title:"Poulet rôti aux herbes",cat:"diner",emoji:"🍗",time:"50 min",desc:"Classique indémodable et 100% safe.",
+       ingredients:["4 cuisses de poulet","2 citrons","Romarin + thym frais","Huile d'olive","Paprika doux","Sel, poivre"],
+       steps:["Préchauffer four 190°C.","Mariner poulet : huile, citron, herbes, paprika.","Disposer dans plat avec rondelles de citron.","Rôtir 45 min en arrosant régulièrement."],
+       tips:"Éviter les marinades du commerce (oignon + ail)."},
+      {id:14,title:"Soupe miso tofu wakamé",cat:"diner",emoji:"🍜",time:"15 min",desc:"Légère et minérale.",
+       ingredients:["1 càs pâte miso sans blé","150g tofu soyeux","Algues wakamé séchées","500ml eau","Ciboulette","1 cm gingembre"],
+       steps:["Réhydrater les algues 5 min.","Chauffer l'eau sans faire bouillir.","Dissoudre le miso hors du feu.","Ajouter tofu, algues, gingembre.","Parsemer de ciboulette."],
+       tips:"Ne jamais faire bouillir le miso."},
+      {id:15,title:"Galettes de sarrasin",cat:"petit-dej",emoji:"🥙",time:"25 min",desc:"Version FODMAP des galettes bretonnes.",
+       ingredients:["120g farine de sarrasin","1 œuf","250ml eau","Sel","Huile de coco","Garniture : œuf + jambon blanc + emmental affiné"],
+       steps:["Mélanger farine, œuf, eau, sel.","Laisser reposer 30 min.","Cuire en galettes fines.","Garnir, replier en carré."],
+       tips:"Farine de sarrasin pur = naturellement sans gluten et low-FODMAP."}
     ];
 
-    // ─── RECETTES UI ─────────────────────────────────────────────────
-    function renderRecipes(filter = 'all') {
-      const grid = document.getElementById('recipes-grid');
-      const filtered = filter === 'all' ? RECIPES : RECIPES.filter(r => r.cat === filter);
-      grid.innerHTML = filtered.map(r => `
-        <div class="recipe-card" data-id="${r.id}">
-          <div class="recipe-emoji">${r.emoji}</div>
-          <div class="recipe-info">
-            <div class="recipe-name">${r.title}</div>
-            <div class="recipe-meta">
-              <span class="recipe-cat">${catLabel(r.cat)}</span>
-              <span class="recipe-time">⏱ ${r.time}</span>
-            </div>
-            <p class="recipe-desc">${r.desc}</p>
-          </div>
-          <button class="recipe-btn">Voir la recette</button>
+    function catLabel(c){return{'petit-dej':'Petit-déjeuner','dejeuner':'Déjeuner','diner':'Dîner','snack':'Snack','dessert':'Dessert'}[c]||c;}
+    function renderRecipes(filter='all'){
+      const grid=document.getElementById('recipes-grid');
+      const list=filter==='all'?RECIPES:RECIPES.filter(r=>r.cat===filter);
+      grid.innerHTML=list.map(r=>`<div class="recipe-card" data-id="${r.id}">
+        <div class="recipe-emoji">${r.emoji}</div>
+        <div class="recipe-info">
+          <div class="recipe-name">${r.title}</div>
+          <div class="recipe-meta"><span class="recipe-cat">${catLabel(r.cat)}</span><span class="recipe-time">⏱ ${r.time}</span></div>
+          <p class="recipe-desc">${r.desc}</p>
         </div>
-      `).join('');
-
-      grid.querySelectorAll('.recipe-card').forEach(card => {
-        card.querySelector('.recipe-btn').addEventListener('click', () => {
-          openRecipe(parseInt(card.dataset.id));
-        });
-      });
+        <button class="recipe-btn">Voir la recette</button>
+      </div>`).join('');
+      grid.querySelectorAll('.recipe-btn').forEach(btn=>btn.addEventListener('click',()=>openRecipe(parseInt(btn.closest('.recipe-card').dataset.id))));
     }
-
-    function catLabel(c) {
-      return { 'petit-dej':'Petit-déjeuner','dejeuner':'Déjeuner','diner':'Dîner','snack':'Snack','dessert':'Dessert' }[c] || c;
-    }
-
-    function openRecipe(id) {
-      const r = RECIPES.find(x => x.id === id);
-      if (!r) return;
-      document.getElementById('modal-content').innerHTML = `
+    function openRecipe(id){
+      const r=RECIPES.find(x=>x.id===id);if(!r)return;
+      document.getElementById('modal-content').innerHTML=`
         <div class="modal-emoji">${r.emoji}</div>
         <h2 class="modal-title">${r.title}</h2>
         <div class="modal-meta"><span>${catLabel(r.cat)}</span><span>⏱ ${r.time}</span></div>
-        <h3>Ingrédients</h3>
-        <ul class="modal-list">${r.ingredients.map(i=>`<li>${i}</li>`).join('')}</ul>
-        <h3>Préparation</h3>
-        <ol class="modal-list steps">${r.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
-        ${r.tips ? `<div class="modal-tip">💡 ${r.tips}</div>` : ''}
-      `;
+        <h3>Ingrédients</h3><ul class="modal-list">${r.ingredients.map(i=>`<li>${i}</li>`).join('')}</ul>
+        <h3>Préparation</h3><ol class="modal-list steps">${r.steps.map(s=>`<li>${s}</li>`).join('')}</ol>
+        ${r.tips?`<div class="modal-tip">💡 ${r.tips}</div>`:''}`;
       document.getElementById('recipe-modal').classList.remove('hidden');
     }
-
-    document.querySelector('.modal-backdrop').addEventListener('click', () => {
-      document.getElementById('recipe-modal').classList.add('hidden');
+    document.querySelector('.modal-backdrop').addEventListener('click',()=>document.getElementById('recipe-modal').classList.add('hidden'));
+    document.querySelector('.modal-close').addEventListener('click',()=>document.getElementById('recipe-modal').classList.add('hidden'));
+    document.querySelectorAll('.filter-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderRecipes(btn.dataset.filter);});
     });
-    document.querySelector('.modal-close').addEventListener('click', () => {
-      document.getElementById('recipe-modal').classList.add('hidden');
-    });
-
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        renderRecipes(btn.dataset.filter);
-      });
-    });
-
     renderRecipes();
 
-    // ─── FRIGO / IA ──────────────────────────────────────────────────
-    let ingredients = lsGet('fodmap_ingredients') || [];
+    // ── BASE DONNÉES FODMAP (Monash) ───────────────────
+    const ALIMENTS=[
+      // LÉGUMES
+      {nom:"Aubergine (cuite)",cat:"legumes",s:"low",note:""},
+      {nom:"Blettes (cuites)",cat:"legumes",s:"low",note:""},
+      {nom:"Bok choy (cuit)",cat:"legumes",s:"low",note:""},
+      {nom:"Brocoli – fleurets cuits",cat:"legumes",s:"low",note:"Max 75g"},
+      {nom:"Carotte",cat:"legumes",s:"low",note:"Crue ou cuite"},
+      {nom:"Céleri branche (cuit)",cat:"legumes",s:"low",note:"Max 75g"},
+      {nom:"Céleri rave (cuit)",cat:"legumes",s:"low",note:""},
+      {nom:"Champignons en conserve (rincés)",cat:"legumes",s:"low",note:""},
+      {nom:"Champignons shiitaké (cuits)",cat:"legumes",s:"low",note:""},
+      {nom:"Chou chinois (cuit)",cat:"legumes",s:"low",note:""},
+      {nom:"Concombre pelé",cat:"legumes",s:"low",note:""},
+      {nom:"Courge butternut (cuite)",cat:"legumes",s:"low",note:"Max 45g"},
+      {nom:"Courgette (cuite)",cat:"legumes",s:"low",note:""},
+      {nom:"Endive (cuite)",cat:"legumes",s:"low",note:""},
+      {nom:"Épinards",cat:"legumes",s:"low",note:"Crus ou cuits"},
+      {nom:"Fenouil (cuit)",cat:"legumes",s:"low",note:"Max ½ bulbe"},
+      {nom:"Germes de soja",cat:"legumes",s:"low",note:""},
+      {nom:"Haricots verts (cuits)",cat:"legumes",s:"low",note:""},
+      {nom:"Laitue, roquette, mâche, batavia",cat:"legumes",s:"low",note:"Crus"},
+      {nom:"Navet (cuit)",cat:"legumes",s:"low",note:""},
+      {nom:"Panais (cuit)",cat:"legumes",s:"low",note:""},
+      {nom:"Patate douce (cuite)",cat:"legumes",s:"low",note:"Max 70g"},
+      {nom:"Pleurotes (cuites)",cat:"legumes",s:"low",note:""},
+      {nom:"Poireau – partie verte uniquement",cat:"legumes",s:"low",note:"Blanc à éviter"},
+      {nom:"Poivron rouge pelé (cuit)",cat:"legumes",s:"low",note:""},
+      {nom:"Pomme de terre",cat:"legumes",s:"low",note:""},
+      {nom:"Radis (cru)",cat:"legumes",s:"low",note:""},
+      {nom:"Rutabaga (cuit)",cat:"legumes",s:"low",note:""},
+      {nom:"Tomate cerise",cat:"legumes",s:"low",note:""},
+      {nom:"Tomate pelée (cuite ou conserve)",cat:"legumes",s:"low",note:""},
+      {nom:"Algues wakamé et nori",cat:"legumes",s:"low",note:""},
+      {nom:"Chou de Bruxelles",cat:"legumes",s:"moderate",note:"Max 2 pièces"},
+      {nom:"Maïs en conserve",cat:"legumes",s:"moderate",note:"Max ½ épi"},
+      {nom:"Brocoli tiges",cat:"legumes",s:"moderate",note:"Fleurets ok, tiges modérées"},
+      {nom:"Ail",cat:"legumes",s:"high",note:"Fructanes – même en poudre"},
+      {nom:"Artichaut",cat:"legumes",s:"high",note:"Fructanes"},
+      {nom:"Asperge",cat:"legumes",s:"high",note:"Fructanes"},
+      {nom:"Betterave crue",cat:"legumes",s:"high",note:""},
+      {nom:"Champignons crus",cat:"legumes",s:"high",note:"Mannitol"},
+      {nom:"Chou-fleur",cat:"legumes",s:"high",note:"Mannitol"},
+      {nom:"Chou vert / rouge",cat:"legumes",s:"high",note:""},
+      {nom:"Échalote",cat:"legumes",s:"high",note:"Fructanes"},
+      {nom:"Légumes fermentés / choucroute",cat:"legumes",s:"high",note:""},
+      {nom:"Oignon (toutes sortes)",cat:"legumes",s:"high",note:"Fructanes"},
+      {nom:"Pois / pois mange-tout",cat:"legumes",s:"high",note:"GOS"},
+      {nom:"Poireau blanc",cat:"legumes",s:"high",note:"Fructanes"},
+      {nom:"Topinambour",cat:"legumes",s:"high",note:"Fructanes"},
+      // FRUITS
+      {nom:"Ananas",cat:"fruits",s:"low",note:""},
+      {nom:"Avocat",cat:"fruits",s:"low",note:"Max ⅛"},
+      {nom:"Banane ferme (peu mûre)",cat:"fruits",s:"low",note:""},
+      {nom:"Clémentine / Mandarine",cat:"fruits",s:"low",note:""},
+      {nom:"Fraises",cat:"fruits",s:"low",note:""},
+      {nom:"Framboises",cat:"fruits",s:"low",note:"Max 30 pièces"},
+      {nom:"Jus de citron / lime",cat:"fruits",s:"low",note:""},
+      {nom:"Kiwi",cat:"fruits",s:"low",note:""},
+      {nom:"Melon",cat:"fruits",s:"low",note:"Max 90g"},
+      {nom:"Myrtilles",cat:"fruits",s:"low",note:"Max 20 pièces"},
+      {nom:"Noix de coco (chair, lait)",cat:"fruits",s:"low",note:"Petite portion"},
+      {nom:"Orange",cat:"fruits",s:"low",note:""},
+      {nom:"Pamplemousse",cat:"fruits",s:"low",note:"Max ½"},
+      {nom:"Papaye",cat:"fruits",s:"low",note:""},
+      {nom:"Raisin",cat:"fruits",s:"low",note:"Max 10 grains"},
+      {nom:"Fruits cuits / compotes sans sucre",cat:"fruits",s:"low",note:"Tous les fruits cuits sont tolérés"},
+      {nom:"Cranberries séchées",cat:"fruits",s:"low",note:"Petite portion"},
+      {nom:"Raisins secs",cat:"fruits",s:"low",note:"Max 1 càs"},
+      {nom:"Banane mûre",cat:"fruits",s:"moderate",note:"Max ½"},
+      {nom:"Avocat > ⅛",cat:"fruits",s:"moderate",note:""},
+      {nom:"Figues fraîches",cat:"fruits",s:"moderate",note:"Max 1 petite"},
+      {nom:"Abricot",cat:"fruits",s:"high",note:"Sorbitol, fructose"},
+      {nom:"Cerise",cat:"fruits",s:"high",note:"Sorbitol"},
+      {nom:"Datte",cat:"fruits",s:"high",note:"Fructose, fructanes"},
+      {nom:"Goyave",cat:"fruits",s:"high",note:""},
+      {nom:"Kaki",cat:"fruits",s:"high",note:""},
+      {nom:"Litchi",cat:"fruits",s:"high",note:"Fructose en excès"},
+      {nom:"Mangue",cat:"fruits",s:"high",note:"Fructose"},
+      {nom:"Mûres",cat:"fruits",s:"high",note:""},
+      {nom:"Nectarine / Brugnon",cat:"fruits",s:"high",note:"Sorbitol"},
+      {nom:"Pastèque",cat:"fruits",s:"high",note:"Fructose, mannitol"},
+      {nom:"Pêche",cat:"fruits",s:"high",note:"Sorbitol"},
+      {nom:"Poire",cat:"fruits",s:"high",note:"Fructose, sorbitol"},
+      {nom:"Pomme",cat:"fruits",s:"high",note:"Fructose, sorbitol"},
+      {nom:"Prune",cat:"fruits",s:"high",note:"Sorbitol"},
+      // CÉRÉALES
+      {nom:"Riz blanc / basmati / complet",cat:"cereales",s:"low",note:""},
+      {nom:"Quinoa",cat:"cereales",s:"low",note:""},
+      {nom:"Millet",cat:"cereales",s:"low",note:""},
+      {nom:"Polenta / Maïs",cat:"cereales",s:"low",note:""},
+      {nom:"Sarrasin",cat:"cereales",s:"low",note:""},
+      {nom:"Farine de riz / sarrasin / maïs",cat:"cereales",s:"low",note:""},
+      {nom:"Pâtes sans gluten (riz, maïs)",cat:"cereales",s:"low",note:""},
+      {nom:"Pain sans gluten (riz, sarrasin)",cat:"cereales",s:"low",note:""},
+      {nom:"Pain au vrai levain (> 20h)",cat:"cereales",s:"low",note:"Fermentation réduit les fructanes"},
+      {nom:"Tapioca / fécule de manioc",cat:"cereales",s:"low",note:""},
+      {nom:"Maïzena / fécule de maïs",cat:"cereales",s:"low",note:""},
+      {nom:"Flocons de riz / sarrasin",cat:"cereales",s:"low",note:""},
+      {nom:"Amarante",cat:"cereales",s:"low",note:""},
+      {nom:"Teff",cat:"cereales",s:"low",note:""},
+      {nom:"Flocons d'avoine (sans gluten certifié)",cat:"cereales",s:"moderate",note:"Max 52g – riches en fibres"},
+      {nom:"Petit épeautre",cat:"cereales",s:"moderate",note:"Petite portion"},
+      {nom:"Blé / Pain de blé / Baguette",cat:"cereales",s:"high",note:"Fructanes"},
+      {nom:"Pâtes de blé",cat:"cereales",s:"high",note:"Fructanes"},
+      {nom:"Seigle",cat:"cereales",s:"high",note:"Fructanes"},
+      {nom:"Orge",cat:"cereales",s:"high",note:"Fructanes"},
+      {nom:"Épeautre",cat:"cereales",s:"high",note:"Fructanes"},
+      {nom:"Couscous de blé",cat:"cereales",s:"high",note:""},
+      {nom:"Son de blé",cat:"cereales",s:"high",note:""},
+      {nom:"Céréales petit-déj au blé",cat:"cereales",s:"high",note:""},
+      {nom:"Kamut",cat:"cereales",s:"high",note:"Fructanes"},
+      // PROTÉINES
+      {nom:"Bœuf",cat:"proteines",s:"low",note:"Non mariné"},
+      {nom:"Agneau",cat:"proteines",s:"low",note:"Non mariné"},
+      {nom:"Porc",cat:"proteines",s:"low",note:"Non mariné"},
+      {nom:"Poulet",cat:"proteines",s:"low",note:"Non mariné"},
+      {nom:"Dinde",cat:"proteines",s:"low",note:""},
+      {nom:"Canard",cat:"proteines",s:"low",note:""},
+      {nom:"Poissons (tous, nature)",cat:"proteines",s:"low",note:"Sans marinade ail/oignon"},
+      {nom:"Fruits de mer",cat:"proteines",s:"low",note:""},
+      {nom:"Œufs",cat:"proteines",s:"low",note:""},
+      {nom:"Tofu ferme bio",cat:"proteines",s:"low",note:""},
+      {nom:"Tempeh",cat:"proteines",s:"low",note:""},
+      {nom:"Jambon blanc nature",cat:"proteines",s:"low",note:"Vérifier sans oignon"},
+      {nom:"Viandes marinées (ail, oignon)",cat:"proteines",s:"high",note:""},
+      {nom:"Charcuteries assaisonnées",cat:"proteines",s:"high",note:"Vérifier ingrédients"},
+      {nom:"Lentilles vertes / blondes",cat:"proteines",s:"high",note:"GOS"},
+      {nom:"Pois chiches",cat:"proteines",s:"high",note:"GOS"},
+      {nom:"Haricots rouges / blancs / noirs",cat:"proteines",s:"high",note:"GOS"},
+      {nom:"Soja (lait, edamame)",cat:"proteines",s:"high",note:"GOS"},
+      // LAITIERS
+      {nom:"Fromages affinés > 6 mois",cat:"laitiers",s:"low",note:"Parmesan, comté, emmental, cheddar, gruyère, mimolette, ossau-iraty…"},
+      {nom:"Beurre",cat:"laitiers",s:"low",note:"Très peu de lactose"},
+      {nom:"Lait sans lactose",cat:"laitiers",s:"low",note:""},
+      {nom:"Yaourt sans lactose",cat:"laitiers",s:"low",note:""},
+      {nom:"Boisson de riz / amande",cat:"laitiers",s:"low",note:"Fortifiée en calcium"},
+      {nom:"Lait de coco (petite portion)",cat:"laitiers",s:"low",note:""},
+      {nom:"Brie / Camembert",cat:"laitiers",s:"moderate",note:"Selon tolérance individuelle"},
+      {nom:"Fromage de chèvre frais",cat:"laitiers",s:"moderate",note:""},
+      {nom:"Mozzarella",cat:"laitiers",s:"moderate",note:""},
+      {nom:"Ricotta",cat:"laitiers",s:"moderate",note:"Petite portion"},
+      {nom:"Lait de vache",cat:"laitiers",s:"high",note:"Lactose"},
+      {nom:"Yaourt classique",cat:"laitiers",s:"high",note:"Lactose"},
+      {nom:"Fromage frais / Petits suisses",cat:"laitiers",s:"high",note:"Lactose"},
+      {nom:"Crème fraîche",cat:"laitiers",s:"high",note:"Lactose"},
+      {nom:"Glaces au lait",cat:"laitiers",s:"high",note:"Lactose"},
+      {nom:"Kéfir",cat:"laitiers",s:"high",note:"Lactose"},
+      // OLÉAGINEUX
+      {nom:"Amandes (≤ 10)",cat:"oleagineux",s:"low",note:""},
+      {nom:"Noisettes (≤ 10)",cat:"oleagineux",s:"low",note:""},
+      {nom:"Noix (≤ 10)",cat:"oleagineux",s:"low",note:""},
+      {nom:"Pignons de pin",cat:"oleagineux",s:"low",note:""},
+      {nom:"Noix du Brésil",cat:"oleagineux",s:"low",note:""},
+      {nom:"Graines de tournesol",cat:"oleagineux",s:"low",note:""},
+      {nom:"Graines de courge",cat:"oleagineux",s:"low",note:""},
+      {nom:"Graines de sésame",cat:"oleagineux",s:"low",note:""},
+      {nom:"Graines de chia",cat:"oleagineux",s:"low",note:""},
+      {nom:"Graines de lin",cat:"oleagineux",s:"low",note:""},
+      {nom:"Arachides / cacahuètes",cat:"oleagineux",s:"low",note:""},
+      {nom:"Noix de macadamia",cat:"oleagineux",s:"low",note:""},
+      {nom:"Amandes > 10",cat:"oleagineux",s:"moderate",note:""},
+      {nom:"Noix de cajou",cat:"oleagineux",s:"high",note:"GOS"},
+      {nom:"Pistaches",cat:"oleagineux",s:"high",note:"Fructanes"},
+      {nom:"Châtaignes",cat:"oleagineux",s:"high",note:""},
+      {nom:"Poudre d'amandes (grande quantité)",cat:"oleagineux",s:"high",note:""},
+      // CONDIMENTS
+      {nom:"Huile d'olive",cat:"condiments",s:"low",note:""},
+      {nom:"Huile de coco",cat:"condiments",s:"low",note:""},
+      {nom:"Huile de sésame",cat:"condiments",s:"low",note:""},
+      {nom:"Huile de colza",cat:"condiments",s:"low",note:""},
+      {nom:"Tamari sans blé",cat:"condiments",s:"low",note:""},
+      {nom:"Mayonnaise maison (sans ail)",cat:"condiments",s:"low",note:"Vérifier étiquette si commerce"},
+      {nom:"Moutarde de Dijon",cat:"condiments",s:"low",note:"Nature, sans ajout"},
+      {nom:"Vinaigre (balsamique, riz, pomme)",cat:"condiments",s:"low",note:"Petite quantité"},
+      {nom:"Sirop d'érable",cat:"condiments",s:"low",note:""},
+      {nom:"Sucre blanc / complet / de coco",cat:"condiments",s:"low",note:""},
+      {nom:"Cacao en poudre pur",cat:"condiments",s:"low",note:""},
+      {nom:"Sel, poivre, épices pures",cat:"condiments",s:"low",note:"Éviter mélanges avec oignon/ail"},
+      {nom:"Herbes fraîches (menthe, basilic, ciboulette, aneth, persil)",cat:"condiments",s:"low",note:""},
+      {nom:"Gingembre (frais ou poudre)",cat:"condiments",s:"low",note:""},
+      {nom:"Curcuma, paprika, cumin, cannelle",cat:"condiments",s:"low",note:""},
+      {nom:"Sauce tomate maison",cat:"condiments",s:"low",note:"Sans oignon ni ail"},
+      {nom:"Miel",cat:"condiments",s:"moderate",note:"Max 20g"},
+      {nom:"Sauce soja classique",cat:"condiments",s:"moderate",note:"Contient blé – préférer tamari"},
+      {nom:"Ail (frais, poudre, huile aromatisée)",cat:"condiments",s:"high",note:"Fructanes même en trace"},
+      {nom:"Oignon en poudre",cat:"condiments",s:"high",note:"Fructanes"},
+      {nom:"Sirop d'agave",cat:"condiments",s:"high",note:"Fructose"},
+      {nom:"Polyols (sorbitol, xylitol, maltitol, mannitol)",cat:"condiments",s:"high",note:"Édulcorants"},
+      {nom:"Bouillons cubes du commerce",cat:"condiments",s:"high",note:"Contiennent oignon et ail"},
+      {nom:"Fructose ajouté",cat:"condiments",s:"high",note:""},
+      // BOISSONS
+      {nom:"Eau plate",cat:"boissons",s:"low",note:""},
+      {nom:"Thé vert / noir / blanc",cat:"boissons",s:"low",note:"Infusion < 3 min"},
+      {nom:"Café filtré / espresso",cat:"boissons",s:"low",note:"Avec lait sans lactose ou boisson végétale"},
+      {nom:"Jus d'orange frais",cat:"boissons",s:"low",note:"Max 125ml"},
+      {nom:"Boisson de riz / amande",cat:"boissons",s:"low",note:""},
+      {nom:"Vin blanc / rouge",cat:"boissons",s:"low",note:"Max 1 verre"},
+      {nom:"Lait d'avoine",cat:"boissons",s:"moderate",note:"Selon tolérance et marque"},
+      {nom:"Kombucha",cat:"boissons",s:"moderate",note:"Selon teneur en sucre"},
+      {nom:"Bière",cat:"boissons",s:"high",note:"Fructanes (orge)"},
+      {nom:"Cidre",cat:"boissons",s:"high",note:"Sorbitol"},
+      {nom:"Sodas sucrés",cat:"boissons",s:"high",note:""},
+      {nom:"Jus de pomme / poire",cat:"boissons",s:"high",note:"Fructose"},
+      {nom:"Lait de vache",cat:"boissons",s:"high",note:"Lactose"},
+      {nom:"Lait de soja (fève entière)",cat:"boissons",s:"high",note:"GOS – ok si protéines de soja"},
+    ];
 
-    function renderIngredients() {
-      const list = document.getElementById('ingredient-list');
-      if (ingredients.length === 0) {
-        list.innerHTML = '<p class="empty-hint">Aucun ingrédient ajouté</p>';
-        return;
-      }
-      list.innerHTML = ingredients.map((ing, i) => `
-        <div class="ingredient-tag">
-          <span>${ing}</span>
-          <button class="ing-remove" data-i="${i}">✕</button>
-        </div>
-      `).join('');
-      list.querySelectorAll('.ing-remove').forEach(btn => {
-        btn.addEventListener('click', () => {
-          ingredients.splice(parseInt(btn.dataset.i), 1);
-          lsSet('fodmap_ingredients', ingredients);
-          renderIngredients();
-        });
-      });
+    function renderAliments(filterCat='all', search=''){
+      const table=document.getElementById('aliments-table');
+      let list=ALIMENTS;
+      if(filterCat!=='all') list=list.filter(a=>a.cat===filterCat);
+      if(search){ const s=search.toLowerCase(); list=list.filter(a=>a.nom.toLowerCase().includes(s)); }
+      if(!list.length){table.innerHTML='<p class="empty-hint">Aucun aliment trouvé</p>';return;}
+      table.innerHTML=`<table><thead><tr><th>Aliment</th><th>Statut</th><th>Remarque</th></tr></thead><tbody>${
+        list.map(a=>`<tr class="aliment-row aliment-${a.s}">
+          <td class="aliment-nom">${a.nom}</td>
+          <td><span class="status-badge status-${a.s}">${a.s==='low'?'🟢 Autorisé':a.s==='moderate'?'🟡 Modéré':'🔴 À éviter'}</span></td>
+          <td class="aliment-note">${a.note||'–'}</td>
+        </tr>`).join('')
+      }</tbody></table>`;
     }
-
-    document.getElementById('btn-add-ingredient').addEventListener('click', () => {
-      const inp = document.getElementById('ingredient-input');
-      const val = inp.value.trim();
-      if (!val) return;
-      // allow comma-separated
-      val.split(',').forEach(v => {
-        const t = v.trim();
-        if (t && !ingredients.includes(t)) ingredients.push(t);
-      });
-      lsSet('fodmap_ingredients', ingredients);
-      inp.value = '';
-      renderIngredients();
+    document.querySelectorAll('.aliment-filter').forEach(btn=>{
+      btn.addEventListener('click',()=>{document.querySelectorAll('.aliment-filter').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderAliments(btn.dataset.f,document.getElementById('aliment-search').value);});
     });
-
-    document.getElementById('ingredient-input').addEventListener('keydown', e => {
-      if (e.key === 'Enter') document.getElementById('btn-add-ingredient').click();
+    document.getElementById('aliment-search').addEventListener('input',function(){
+      renderAliments(document.querySelector('.aliment-filter.active')?.dataset.f||'all',this.value);
     });
+    renderAliments();
 
+    // ── FRIGO / IA ───────────────────────────────────────
+    let ingredients = lsGet('fodmap_ingredients')||[];
+    function renderIngredients(){
+      const list=document.getElementById('ingredient-list');
+      if(!ingredients.length){list.innerHTML='<p class="empty-hint">Aucun ingrédient ajouté</p>';return;}
+      list.innerHTML=ingredients.map((ing,i)=>`<div class="ingredient-tag"><span>${ing}</span><button class="ing-remove" data-i="${i}">✕</button></div>`).join('');
+      list.querySelectorAll('.ing-remove').forEach(btn=>btn.addEventListener('click',()=>{ingredients.splice(parseInt(btn.dataset.i),1);lsSet('fodmap_ingredients',ingredients);renderIngredients();}));
+    }
+    document.getElementById('btn-add-ingredient').addEventListener('click',()=>{
+      const inp=document.getElementById('ingredient-input');
+      inp.value.trim().split(',').forEach(v=>{const t=v.trim();if(t&&!ingredients.includes(t))ingredients.push(t);});
+      lsSet('fodmap_ingredients',ingredients);inp.value='';renderIngredients();
+    });
+    document.getElementById('ingredient-input').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('btn-add-ingredient').click();});
+    document.getElementById('btn-clear-ingredients').addEventListener('click',()=>{ingredients=[];lsSet('fodmap_ingredients',[]);renderIngredients();});
     renderIngredients();
 
-    document.getElementById('btn-generate-recipes').addEventListener('click', async () => {
-      if (ingredients.length === 0) {
-        alert('Ajoutez d\'abord des ingrédients !');
-        return;
-      }
-      const btn = document.getElementById('btn-generate-recipes');
-      btn.innerHTML = '<span>⏳ Génération en cours…</span>';
-      btn.disabled = true;
-
-      const placeholder = document.getElementById('ai-result-placeholder');
-      const result = document.getElementById('ai-result');
-      placeholder.classList.add('hidden');
+    document.getElementById('btn-generate-recipes').addEventListener('click',async()=>{
+      if(!ingredients.length){alert('Ajoutez d\'abord des ingrédients !');return;}
+      const btn=document.getElementById('btn-generate-recipes');
+      const label=document.getElementById('gen-btn-label');
+      label.textContent='⏳ Génération en cours…'; btn.disabled=true;
+      document.getElementById('ai-result-placeholder').classList.add('hidden');
+      const result=document.getElementById('ai-result');
       result.classList.remove('hidden');
-      result.innerHTML = '<div class="ai-loading"><div class="spinner"></div><p>L\'IA génère vos recettes…</p></div>';
+      result.innerHTML='<div class="ai-loading"><div class="spinner"></div><p>L\'IA génère vos recettes…</p></div>';
 
-      // Phase actuelle
-      let phaseInfo = '';
-      if (startDate) {
-        const diff = Math.floor((new Date() - new Date(startDate)) / 86400000) + 1;
-        const { phase } = getPhaseInfo(diff);
-        phaseInfo = `La personne est en Phase ${phase.num} du régime FODMAP (${phase.name}).`;
-      } else {
-        phaseInfo = `La personne suit la Phase 1 du régime FODMAP (élimination stricte).`;
+      let phaseCtx='Phase 1 (élimination stricte — aucun aliment riche en FODMAP).';
+      if(startDate){
+        const diff=Math.max(1,Math.floor((new Date()-new Date(startDate))/86400000)+1);
+        const {phase}=getPhaseInfo(diff);
+        phaseCtx=`Phase ${phase.num} (${phase.name}).`;
       }
 
       try {
-        const res = await fetch("https://api.anthropic.com/v1/messages", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            model: "claude-sonnet-4-20250514",
-            max_tokens: 1000,
-            system: `Tu es une diététicienne spécialisée dans le régime FODMAP. 
-${phaseInfo}
-Tu dois proposer 3 recettes adaptées au régime FODMAP, en utilisant uniquement les ingrédients fournis (plus des condiments basiques FODMAP-safe comme huile d'olive, sel, poivre, herbes fraîches, jus de citron).
-Réponds UNIQUEMENT en JSON valide, sans backticks ni markdown, avec ce format exact :
-{"recettes":[{"titre":"...","emoji":"...","temps":"...","ingredients":["..."],"etapes":["..."],"conseil":"..."}]}`,
-            messages: [{ role: "user", content: `Ingrédients disponibles : ${ingredients.join(', ')}` }]
+        const res=await fetch("https://api.anthropic.com/v1/messages",{
+          method:"POST",
+          headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({
+            model:"claude-sonnet-4-20250514",
+            max_tokens:1500,
+            system:`Tu es une diététicienne spécialisée FODMAP formée par l'Université Monash.
+La personne est en ${phaseCtx}
+Propose 3 recettes low-FODMAP utilisant uniquement les ingrédients fournis (plus condiments basiques low-FODMAP autorisés : huile d'olive, sel, poivre, citron, herbes fraîches, gingembre, curcuma, tamari sans blé).
+Si un ingrédient est riche en FODMAP, ne l'utilise pas et note-le dans "alertes".
+Réponds UNIQUEMENT en JSON valide sans backticks :
+{"recettes":[{"titre":"","emoji":"","temps":"","difficulte":"Facile|Moyen|Élaboré","ingredients":[""],"etapes":[""],"conseil":"","alertes":""}],"avertissement":""}`,
+            messages:[{role:"user",content:`Ingrédients : ${ingredients.join(', ')}`}]
           })
         });
-        const data = await res.json();
-        const text = data.content.map(c => c.text || '').join('');
-        const parsed = JSON.parse(text.replace(/```json|```/g, '').trim());
-        
-        result.innerHTML = `
+        if(!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data=await res.json();
+        const text=data.content.filter(c=>c.type==='text').map(c=>c.text).join('');
+        const parsed=JSON.parse(text.replace(/```json|```/g,'').trim());
+        result.innerHTML=`
           <h3 class="ai-result-title">✨ ${parsed.recettes.length} recettes générées</h3>
-          ${parsed.recettes.map(r => `
-            <div class="ai-recipe">
-              <div class="ai-recipe-header">
-                <span class="ai-recipe-emoji">${r.emoji}</span>
-                <div>
-                  <div class="ai-recipe-name">${r.titre}</div>
-                  <div class="ai-recipe-time">⏱ ${r.temps}</div>
-                </div>
-              </div>
-              <div class="ai-recipe-section"><strong>Ingrédients :</strong>
-                <ul>${r.ingredients.map(i=>`<li>${i}</li>`).join('')}</ul>
-              </div>
-              <div class="ai-recipe-section"><strong>Préparation :</strong>
-                <ol>${r.etapes.map(e=>`<li>${e}</li>`).join('')}</ol>
-              </div>
-              ${r.conseil ? `<div class="ai-tip">💡 ${r.conseil}</div>` : ''}
+          ${parsed.avertissement?`<div class="ai-warning">ℹ️ ${parsed.avertissement}</div>`:''}
+          ${parsed.recettes.map(r=>`<div class="ai-recipe">
+            <div class="ai-recipe-header">
+              <span class="ai-recipe-emoji">${r.emoji}</span>
+              <div><div class="ai-recipe-name">${r.titre}</div><div class="ai-recipe-meta">⏱ ${r.temps} · ${r.difficulte}</div></div>
             </div>
-          `).join('')}
-        `;
+            ${r.alertes?`<div class="ai-alert">⚠️ Ingrédients non utilisés (FODMAP élevé) : ${r.alertes}</div>`:''}
+            <div class="ai-recipe-section"><strong>Ingrédients :</strong><ul>${r.ingredients.map(i=>`<li>${i}</li>`).join('')}</ul></div>
+            <div class="ai-recipe-section"><strong>Préparation :</strong><ol>${r.etapes.map(e=>`<li>${e}</li>`).join('')}</ol></div>
+            ${r.conseil?`<div class="ai-tip">💡 ${r.conseil}</div>`:''}
+          </div>`).join('')}`;
       } catch(e) {
-        result.innerHTML = `<div class="ai-error">❌ Erreur lors de la génération. Vérifiez votre connexion et réessayez.<br><small>${e.message}</small></div>`;
+        result.innerHTML=`<div class="ai-error">❌ Erreur lors de la génération.<br><small>${e.message}</small></div>`;
       }
-
-      btn.innerHTML = '<span>✨ Générer des recettes</span>';
-      btn.disabled = false;
+      label.textContent='✨ Générer des recettes'; btn.disabled=false;
     });
 
-    // ─── JOURNAL ─────────────────────────────────────────────────────
-    // Set today's date
-    document.getElementById('journal-date').value = new Date().toISOString().split('T')[0];
-
-    const intensityLabels = ['0 – Aucun','1 – Léger','2 – Modéré','3 – Gêne notable','4 – Intense','5 – Très intense'];
-    document.getElementById('journal-intensity').addEventListener('input', function() {
-      document.getElementById('intensity-label').textContent = intensityLabels[this.value];
+    // ── JOURNAL ──────────────────────────────────────────
+    document.getElementById('journal-date').value=new Date().toISOString().split('T')[0];
+    const iLabels=['0 – Aucun','1 – Léger','2 – Modéré','3 – Gêne notable','4 – Intense','5 – Très intense'];
+    document.getElementById('journal-intensity').addEventListener('input',function(){document.getElementById('intensity-label').textContent=iLabels[this.value];});
+    async function loadHistory(){
+      let entries=await getCol(`users/${UID}/journal`);
+      if(!entries.length) entries=lsGet('fodmap_journal')||[];
+      const h=document.getElementById('journal-history');
+      if(!entries.length){h.innerHTML='<p class="empty-hint">Aucune entrée enregistrée</p>';return;}
+      h.innerHTML=entries.map(e=>{const[y,m,d]=e.date.split('-');return`<div class="journal-entry">
+        <div class="entry-date">${d}/${m}/${y}</div>
+        <div class="entry-intensity intensity-${e.intensity}">${iLabels[e.intensity]||e.intensity}</div>
+        ${e.symptoms?.length?`<div class="entry-symptoms">${e.symptoms.join(' · ')}</div>`:''}
+        ${e.meals?`<p class="entry-meals"><strong>Repas :</strong> ${e.meals}</p>`:''}
+        ${e.notes?`<p class="entry-notes">${e.notes}</p>`:''}
+      </div>`;}).join('');
+    }
+    document.getElementById('btn-save-journal').addEventListener('click',async()=>{
+      const date=document.getElementById('journal-date').value;
+      if(!date){alert('Choisissez une date.');return;}
+      const entry={date,meals:document.getElementById('journal-meals').value.trim(),symptoms:[...document.querySelectorAll('.symptom-grid input:checked')].map(c=>c.value),intensity:parseInt(document.getElementById('journal-intensity').value),notes:document.getElementById('journal-notes').value.trim()};
+      const local=lsGet('fodmap_journal')||[];local.unshift(entry);lsSet('fodmap_journal',local);
+      await addCol(`users/${UID}/journal`,entry);
+      document.getElementById('journal-meals').value='';
+      document.getElementById('journal-notes').value='';
+      document.querySelectorAll('.symptom-grid input').forEach(c=>c.checked=false);
+      document.getElementById('journal-intensity').value=0;
+      document.getElementById('intensity-label').textContent=iLabels[0];
+      loadHistory();
     });
-
-    async function loadJournalHistory() {
-      let entries = await getCollection(`users/${USER_ID}/journal`);
-      if (!entries.length) entries = lsGet('fodmap_journal') || [];
-      renderJournalHistory(entries);
-    }
-
-    function renderJournalHistory(entries) {
-      const hist = document.getElementById('journal-history');
-      if (!entries.length) {
-        hist.innerHTML = '<p class="empty-hint">Aucune entrée enregistrée</p>';
-        return;
-      }
-      hist.innerHTML = entries.map(e => `
-        <div class="journal-entry">
-          <div class="entry-date">${formatDate(e.date)}</div>
-          <div class="entry-intensity intensity-${e.intensity}">Intensité : ${intensityLabels[e.intensity] || e.intensity}</div>
-          ${e.symptoms.length ? `<div class="entry-symptoms">${e.symptoms.join(' · ')}</div>` : ''}
-          ${e.meals ? `<p class="entry-meals"><strong>Repas :</strong> ${e.meals}</p>` : ''}
-          ${e.notes ? `<p class="entry-notes">${e.notes}</p>` : ''}
-        </div>
-      `).join('');
-    }
-
-    function formatDate(d) {
-      if (!d) return '';
-      const [y,m,day] = d.split('-');
-      return `${day}/${m}/${y}`;
-    }
-
-    document.getElementById('btn-save-journal').addEventListener('click', async () => {
-      const date = document.getElementById('journal-date').value;
-      const meals = document.getElementById('journal-meals').value.trim();
-      const symptoms = [...document.querySelectorAll('.symptom-grid input:checked')].map(c => c.value);
-      const intensity = parseInt(document.getElementById('journal-intensity').value);
-      const notes = document.getElementById('journal-notes').value.trim();
-
-      if (!date) { alert('Choisissez une date.'); return; }
-
-      const entry = { date, meals, symptoms, intensity, notes };
-
-      // Save local
-      const local = lsGet('fodmap_journal') || [];
-      local.unshift(entry);
-      lsSet('fodmap_journal', local);
-
-      // Save remote
-      await addToCollection(`users/${USER_ID}/journal`, entry);
-
-      // Reset form
-      document.getElementById('journal-meals').value = '';
-      document.getElementById('journal-notes').value = '';
-      document.querySelectorAll('.symptom-grid input').forEach(c => c.checked = false);
-      document.getElementById('journal-intensity').value = 0;
-      document.getElementById('intensity-label').textContent = intensityLabels[0];
-
-      loadJournalHistory();
-    });
-
-    loadJournalHistory();
-
+    loadHistory();
   </script>
   <script src="app.js"></script>
 </body>
